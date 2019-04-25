@@ -1,0 +1,27 @@
+<ng-container *ngIf="question && question.tags">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        {{ question.title }}
+      </h3>
+    </div>
+    <div class="panel-body">
+      <textarea class="form-control variable-textarea hidden" [(ngModel)]="question.text" rows="5"></textarea>
+      <markdown class="variable-binding" [data]="question.text"></markdown>
+    </div>
+    <div class="panel-footer" *ngIf="question.tags && question.tags.length">
+      <span class="label label-primary" *ngFor="let tag of question.tags">
+        {{ tag.text }}
+      </span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="pull-right">
+      <div class="btn-group">
+        <label class="btn btn-info" btnCheckbox role="button" (click)="gotoEditQuestion(question.id)">Edit</label>
+        <label class="btn btn-danger" btnCheckbox role="button" (click)="deleteQuestion(question.id)">Delete</label>
+      </div>
+    </div>
+  </div>
+</ng-container>

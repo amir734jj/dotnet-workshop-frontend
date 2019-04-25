@@ -1,0 +1,23 @@
+<div class="container">
+
+  <ng-container *ngIf="questions && questions.length">
+    <div class="panel panel-default" *ngFor="let question of questions">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a [routerLink]="['/question', question.id]">
+            {{ question.title }}
+          </a>
+        </h3>
+      </div>
+      <div class="panel-body">
+        {{ question.text.substring(0, 20) }} ...
+      </div>
+      <div class="panel-footer" *ngIf="question && question.tags">
+        <span class="label label-primary" *ngFor="let tag of question.tags">
+          {{ tag.text }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+
+</div>
