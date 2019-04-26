@@ -7,13 +7,17 @@ import {QuestionUpdateComponent} from '../components/question/update/question.up
 import {AppRoutingModule} from '../app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MarkdownModule} from 'ngx-markdown';
+import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
 
 @NgModule({
   imports: [
-    CommonModule,
-    AppRoutingModule,
+    TagInputModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    CommonModule,
+    AppRoutingModule,
     MarkdownModule.forRoot()
   ],
   providers: [QuestionService],

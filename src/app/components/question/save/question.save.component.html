@@ -15,10 +15,8 @@
 
       <markdown class="variable-binding" [data]="question.text"></markdown>
     </div>
-    <div class="panel-footer" *ngIf="question.tags && question.tags.length">
-      <span class="label label-primary" *ngFor="let tag of question.tags">
-        {{ tag.text }}
-      </span>
+    <div class="panel-footer">
+      <tag-input [(ngModel)]="question.tags"></tag-input>
     </div>
   </div>
 
