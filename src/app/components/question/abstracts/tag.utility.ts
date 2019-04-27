@@ -1,5 +1,5 @@
 import {Tag} from '../../../models/Tag';
-import {randomNumber} from '../../../utilities/random';
+import {Guid} from 'guid-typescript';
 
 export class TagUtility {
 
@@ -12,12 +12,8 @@ export class TagUtility {
   }
 
   resolveRawTags(): Tag[] {
-    return this.tags.map((x, index) => {
-      let id = randomNumber();
-
-      if (this.originalTags[index]) {
-        id = this.originalTags[index].id;
-      }
+    return this.tags.map((x) => {
+      const id = Guid.create().toString();
 
       return {id, text: x.display};
     });

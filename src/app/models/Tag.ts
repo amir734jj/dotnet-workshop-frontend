@@ -1,10 +1,10 @@
-import {randomNumber} from '../utilities/random';
+import {Guid} from 'guid-typescript';
 
 export class Tag {
-  id: number;
+  id: string;
   text: string;
 
   constructor() {
-    this.id = randomNumber();
+    this.id = Guid.create().toString();
   }
 }

@@ -1,14 +1,14 @@
 import {Tag} from './Tag';
-import {randomNumber} from '../utilities/random';
+import {Guid} from 'guid-typescript';
 
 export class Question {
-  id: number;
+  id: string;
   title: string;
   text: string;
   tags: Tag[];
   vote: number;
 
   constructor() {
-    this.id = randomNumber();
+    this.id = Guid.create().toString();
   }
 }
