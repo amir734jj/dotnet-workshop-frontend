@@ -2,18 +2,19 @@ import {Component, OnInit} from '@angular/core';
 import {Question} from '../../../models/Question';
 import {QuestionService} from '../../../services/board.service';
 import {Router} from '@angular/router';
+import {TagUtility} from '../abstracts/tag.utility';
 
 @Component({
   selector: 'app-question-save',
   templateUrl: './question.save.component.html',
   styleUrls: ['./question.save.component.sass']
 })
-export class QuestionSaveComponent implements OnInit {
+export class QuestionSaveComponent extends TagUtility implements OnInit {
 
   question: Question;
 
   constructor(private router: Router, private questionService: QuestionService) {
-    this.question = null;
+    super();
   }
 
   ngOnInit() {
@@ -21,6 +22,7 @@ export class QuestionSaveComponent implements OnInit {
   }
 
   handleSaveQuestion() {
+    this.question.tags = this.resolveRawTags();
     this.questionService.saveQuestion(this.question)
       .subscribe(res => {
         this.router.navigate(['./']);

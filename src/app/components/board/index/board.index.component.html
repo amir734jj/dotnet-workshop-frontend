@@ -1,5 +1,4 @@
 <div class="container">
-
   <ng-container *ngIf="questions && questions.length">
     <div class="panel panel-default" *ngFor="let question of questions">
       <div class="panel-heading">
@@ -13,11 +12,14 @@
         {{ question.text.substring(0, 20) }} ...
       </div>
       <div class="panel-footer" *ngIf="question && question.tags">
-        <span class="label label-primary" *ngFor="let tag of question.tags">
-          {{ tag.text }}
-        </span>
+        <div class="row">
+          <div class="col-sm-6 text-left">
+            <span class="label label-primary readonly-tag" *ngFor="let tag of question.tags">
+              {{ tag.text }}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </ng-container>
-
 </div>

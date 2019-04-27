@@ -10,7 +10,12 @@ export const appRoutes: Routes = [
   {
     path: '',
     component: BoardIndexComponent
-  }, {
+  },
+  {
+    path: 'home',
+    component: BoardIndexComponent
+  },
+  {
     path: 'board',
     component: BoardIndexComponent
   },
