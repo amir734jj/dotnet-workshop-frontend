@@ -4,6 +4,7 @@ import {QuestionService} from '../services/board.service';
 import {BoardIndexComponent} from '../components/board/index/board.index.component';
 import {AppRoutingModule} from '../app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {VoteService} from '../services/vote.service';
 
 @NgModule({
   imports: [
@@ -12,7 +13,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [QuestionService],
+  providers: [QuestionService, VoteService],
   declarations: [BoardIndexComponent],
   exports: [BoardIndexComponent]
 })

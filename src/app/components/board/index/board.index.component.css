@@ -1,5 +1,13 @@
 .readonly-tag {
   margin: 0.5rem;
-  display: inline-block; }
+  display: inline-block;
+  font-size: 110%;
+  padding: 0.5rem; }
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+  margin-top: 50%; }
 
 /*# sourceMappingURL=board.index.component.css.map */

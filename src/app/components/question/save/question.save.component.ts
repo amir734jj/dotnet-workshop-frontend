@@ -11,15 +11,14 @@ import {TagUtility} from '../abstracts/tag.utility';
 })
 export class QuestionSaveComponent extends TagUtility implements OnInit {
 
-  question: Question;
+  public question: Question;
 
   constructor(private router: Router, private questionService: QuestionService) {
     super();
-  }
-
-  ngOnInit() {
     this.question = new Question();
   }
+
+  ngOnInit() { }
 
   handleSaveQuestion() {
     this.question.tags = this.resolveRawTags();

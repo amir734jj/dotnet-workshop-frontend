@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {QuestionService} from '../../../services/board.service';
 import {Question} from '../../../models/Question';
+import {Answer} from '../../../models/Answer';
+import {AnswerService} from '../../../services/answer.service';
+import {VoteService} from '../../../services/vote.service';
+import {AuthenticationUtility} from '../../../utilities/authentication.utility';
 
 @Component({
   selector: 'app-question-index',
@@ -9,9 +13,14 @@ import {Question} from '../../../models/Question';
   styleUrls: ['./question.index.component.sass']
 })
 export class QuestionIndexComponent implements OnInit {
-  private question: Question;
+  public question: Question;
+  public answer: Answer;
 
-  constructor(private route: ActivatedRoute, private router: Router, private questionService: QuestionService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private questionService: QuestionService,
+              private answerService: AnswerService, private voteService: VoteService,
+              private authenticationUtility: AuthenticationUtility) {
+    this.answer = new Answer();
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -25,13 +34,35 @@ export class QuestionIndexComponent implements OnInit {
     });
   }
 
-  deleteQuestion(id: string) {
-    this.questionService.deleteQuestion(id).subscribe(() => {
+  deleteQuestion() {
+    this.questionService.deleteQuestion(this.question.id).subscribe(() => {
       this.router.navigate(['./']);
     });
   }
 
-  gotoEditQuestion(id: string) {
-    this.router.navigate([`./question/${id}/edit`]);
+  submitAnswer() {
+    this.answerService.submitAnswer(this.question.id, this.answer).subscribe(() => {
+      this.router.navigate(['./']);
+    });
+  }
+
+  gotoEditQuestion() {
+    this.router.navigate([`./question/${this.question.id}/edit`]);
+  }
+
+  upVote() {
+    this.voteService.upVote(this.question.id).subscribe(res => {
+      this.getQuestion(this.question.id);
+    });
+  }
+
+  downVote() {
+    this.voteService.downVote(this.question.id).subscribe(res => {
+      this.getQuestion(this.question.id);
+    });
+  }
+
+  isAuthenticated() {
+    return !!this.authenticationUtility.get();
   }
 }

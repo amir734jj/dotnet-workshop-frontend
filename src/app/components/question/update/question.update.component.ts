@@ -11,7 +11,7 @@ import {TagUtility} from '../abstracts/tag.utility';
 })
 export class QuestionUpdateComponent extends TagUtility implements OnInit {
 
-  private question: Question;
+  public question: Question;
 
   constructor(private route: ActivatedRoute, private router: Router, private questionService: QuestionService) {
     super();

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {QuestionService} from '../../../services/board.service';
 import {Question} from '../../../models/Question';
+import {VoteService} from '../../../services/vote.service';
+import {AuthenticationUtility} from '../../../utilities/authentication.utility';
 
 @Component({
   selector: 'app-board',
@@ -9,7 +11,7 @@ import {Question} from '../../../models/Question';
 })
 export class BoardIndexComponent implements OnInit {
 
-  constructor(private questionService: QuestionService) { }
+  constructor(private questionService: QuestionService, private voteService: VoteService, private authenticationUtility: AuthenticationUtility) { }
 
   questions: Array<Question>;
 
@@ -21,5 +23,21 @@ export class BoardIndexComponent implements OnInit {
     this.questionService.getQuestions().subscribe(res => {
       this.questions = res;
     });
+  }
+
+  upVote(id: string) {
+    this.voteService.upVote(id).subscribe(res => {
+      this.getQuestions();
+    });
+  }
+
+  downVote(id: string) {
+    this.voteService.downVote(id).subscribe(res => {
+      this.getQuestions();
+    });
+  }
+
+  isAuthenticated() {
+    return !!this.authenticationUtility.get();
   }
 }

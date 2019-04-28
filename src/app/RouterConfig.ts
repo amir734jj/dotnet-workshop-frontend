@@ -5,30 +5,18 @@ import {BoardIndexComponent} from './components/board/index/board.index.componen
 import {QuestionIndexComponent} from './components/question/index/question.index.component';
 import {QuestionSaveComponent} from './components/question/save/question.save.component';
 import {QuestionUpdateComponent} from './components/question/update/question.update.component';
+import {LogoutComponent} from './components/account/logout/logout.component';
+import {RegisterComponent} from './components/account/register/register.component';
+import {LoginComponent} from './components/account/login/login.component';
 
 export const appRoutes: Routes = [
-  {
-    path: '',
-    component: BoardIndexComponent
-  },
-  {
-    path: 'home',
-    component: BoardIndexComponent
-  },
-  {
-    path: 'board',
-    component: BoardIndexComponent
-  },
-  {
-    path: 'question/new',
-    component: QuestionSaveComponent
-  },
-  {
-    path: 'question/:id/edit',
-    component: QuestionUpdateComponent
-  },
-  {
-    path: 'question/:id',
-    component: QuestionIndexComponent
-  }
+  {path: '', component: BoardIndexComponent},
+  {path: 'home', component: BoardIndexComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'logout', component: LogoutComponent},
+  {path: 'board', component: BoardIndexComponent},
+  {path: 'question/new', component: QuestionSaveComponent},
+  {path: 'question/:id/edit', component: QuestionUpdateComponent},
+  {path: 'question/:id', component: QuestionIndexComponent}
 ];

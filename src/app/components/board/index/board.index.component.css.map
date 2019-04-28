@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,aAAa;EACX,MAAM,EAAE,MAAM;EACd,OAAO,EAAE,YAAY",
+"mappings": "AAAA,aAAa;EACX,MAAM,EAAE,MAAM;EACd,OAAO,EAAE,YAAY;EACrB,SAAS,EAAE,IAAI;EACf,OAAO,EAAE,MAAM;;AAEjB,QAAQ;EACN,OAAO,EAAE,YAAY;EACrB,cAAc,EAAE,MAAM;EACtB,KAAK,EAAE,IAAI;EACX,UAAU,EAAE,GAAG",
 "sources": ["board.index.component.sass"],
 "names": [],
 "file": "board.index.component.css"

@@ -7,10 +7,23 @@
       <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <a routerLink="/">Home</a>
       </li>
-      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated()">
         <a routerLink="question/new">
-          Submit
+          Submit Question
         </a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="!isAuthenticated()">
+        <a routerLink="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+      </li>
+
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="!isAuthenticated()">
+        <a routerLink="login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+      </li>
+
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated()">
+        <a routerLink="logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
       </li>
     </ul>
   </div>
@@ -19,3 +32,5 @@
 <div class="container">
   <router-outlet></router-outlet>
 </div>
+
+<app-common></app-common>

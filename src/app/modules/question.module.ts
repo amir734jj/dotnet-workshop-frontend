@@ -8,7 +8,8 @@ import {AppRoutingModule} from '../app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MarkdownModule} from 'ngx-markdown';
 import { TagInputModule } from 'ngx-chips';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AnswerService} from '../services/answer.service'; // this is needed!
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
     AppRoutingModule,
     MarkdownModule.forRoot()
   ],
-  providers: [QuestionService],
+  providers: [QuestionService, AnswerService],
   declarations: [QuestionIndexComponent, QuestionSaveComponent, QuestionUpdateComponent],
   exports: [QuestionIndexComponent, QuestionSaveComponent, QuestionUpdateComponent]
 })

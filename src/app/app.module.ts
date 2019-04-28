@@ -9,6 +9,8 @@ import {BoardModule} from './modules/board.module';
 import {HttpClientModule} from '@angular/common/http';
 import {QuestionModule} from './modules/question.module';
 import {ButtonsModule} from 'ngx-bootstrap/buttons';
+import {AccountModule} from './modules/account.module';
+import {CommonComponentModule} from './modules/common.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import {ButtonsModule} from 'ngx-bootstrap/buttons';
     RouterModule.forRoot(appRoutes),
     ButtonsModule.forRoot(),
     HttpClientModule,
+    CommonComponentModule,
+    AccountModule,
     BoardModule,
     QuestionModule
   ],
