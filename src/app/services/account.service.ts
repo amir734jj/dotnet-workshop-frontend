@@ -3,21 +3,28 @@ import {API_ADDRESS} from '../constants/api';
 import {Account} from '../models/Account';
 import {Injectable} from '@angular/core';
 import {AuthenticationUtility} from '../utilities/authentication.utility';
+import {tap} from 'rxjs/internal/operators';
+import {TokenService} from './abstracts/token.service';
 
 @Injectable()
-export class AccountService {
+export class AccountService extends TokenService {
 
   host: string = API_ADDRESS + '/account';
 
   constructor(private httpClient: HttpClient, private authenticationUtility: AuthenticationUtility) {
+    super();
+  }
+
+  getToken(): string {
+    return this.authenticationUtility.getToken();
   }
 
   refreshAccountInfo() {
     const uri = `${this.host}`;
 
-    return this.httpClient.get<Account>(uri)
+    return this.httpClient.get<Account>(uri, { headers: this.resolveHeader()})
       .subscribe((x) => {
-        this.authenticationUtility.set(Object.keys(x).length ? x : null);
+        this.authenticationUtility.setAccount(Object.keys(x).length ? x : null);
       });
   }
 
@@ -27,7 +34,10 @@ export class AccountService {
     const result = this.httpClient.post(uri, {
       username,
       password
-    }, { responseType: 'text'});
+    }, {responseType: 'text', headers: this.resolveHeader()}).pipe(tap(res => {
+      this.authenticationUtility.setToken(res);
+      this.refreshAccountInfo();
+    }));
 
     return result;
   }
@@ -35,21 +45,21 @@ export class AccountService {
   logOut() {
     const uri = `${this.host}/logout`;
 
-    const result = this.httpClient.get(uri, { responseType: 'text'});
-
-    return result;
+    return this.httpClient.get(uri, {responseType: 'text', headers: this.resolveHeader()})
+      .pipe(tap(_ => {
+        this.authenticationUtility.setToken('');
+        this.refreshAccountInfo();
+      }));
   }
 
   register(fullname: string, email: string, username: string, password: string) {
     const uri = `${this.host}/register`;
 
-    const result = this.httpClient.post(uri, {
+    return this.httpClient.post(uri, {
       fullname,
       email,
       username,
       password
-    }, { responseType: 'text'});
-
-    return result;
+    }, {responseType: 'text', headers: this.resolveHeader()});
   }
 }

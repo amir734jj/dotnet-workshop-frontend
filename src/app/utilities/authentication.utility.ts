@@ -3,13 +3,22 @@ import {Account} from '../models/Account';
 
 @Injectable()
 export class AuthenticationUtility {
-  private static ACCOUNT_INFO = null;
+  private static BEARER_TOKEN = 'BEARER_TOKEN';
+  private static ACCOUNT_INFO: Account = null;
 
-  public set(info: Account) {
+  public setAccount(info: Account) {
     AuthenticationUtility.ACCOUNT_INFO = info;
   }
 
-  public get() {
+  public getAccount() {
     return AuthenticationUtility.ACCOUNT_INFO;
+  }
+
+  public setToken(token: string) {
+    localStorage.setItem(AuthenticationUtility.BEARER_TOKEN, token);
+  }
+
+  public getToken() {
+    return localStorage.getItem(AuthenticationUtility.BEARER_TOKEN);
   }
 }

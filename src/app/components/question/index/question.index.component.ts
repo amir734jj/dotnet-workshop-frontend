@@ -63,6 +63,6 @@ export class QuestionIndexComponent implements OnInit {
   }
 
   isAuthenticated() {
-    return !!this.authenticationUtility.get();
+    return !!this.authenticationUtility.getAccount();
   }
 }

@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
 
     this.identityService.logIn(this.username, this.password)
       .subscribe(x => {
-        this.identityService.refreshAccountInfo();
         this.router.navigate(['./']);
       });
   }

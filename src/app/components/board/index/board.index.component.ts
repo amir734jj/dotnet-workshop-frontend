@@ -38,6 +38,6 @@ export class BoardIndexComponent implements OnInit {
   }
 
   isAuthenticated() {
-    return !!this.authenticationUtility.get();
+    return !!this.authenticationUtility.getAccount();
   }
 }

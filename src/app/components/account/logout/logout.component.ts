@@ -18,7 +18,6 @@ export class LogoutComponent implements AfterViewChecked {
   logOut() {
     this.identityService.logOut()
       .subscribe(x => {
-        this.identityService.refreshAccountInfo();
         this.router.navigate(['./home']);
       });
   }

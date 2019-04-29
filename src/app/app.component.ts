@@ -12,6 +12,6 @@ export class AppComponent {
   constructor(private authenticationUtility: AuthenticationUtility) { }
 
   isAuthenticated() {
-    return !!this.authenticationUtility.get();
+    return !!this.authenticationUtility.getAccount();
   }
 }

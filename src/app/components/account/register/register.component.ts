@@ -24,7 +24,6 @@ export class RegisterComponent implements OnInit {
 
     this.identityService.register(this.fullname, this.email, this.username, this.password)
       .subscribe(x => {
-        this.identityService.refreshAccountInfo();
         this.router.navigate(['./login']);
       });
   }
