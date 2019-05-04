@@ -11,6 +11,7 @@ import {QuestionModule} from './modules/question.module';
 import {ButtonsModule} from 'ngx-bootstrap/buttons';
 import {AccountModule} from './modules/account.module';
 import {CommonComponentModule} from './modules/common.module';
+import {ChatModule} from './modules/chat.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {CommonComponentModule} from './modules/common.module';
     CommonComponentModule,
     AccountModule,
     BoardModule,
-    QuestionModule
+    QuestionModule,
+    ChatModule
   ],
   providers: [],
   bootstrap: [AppComponent]

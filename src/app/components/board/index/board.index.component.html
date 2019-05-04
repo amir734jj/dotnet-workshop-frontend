@@ -1,8 +1,8 @@
 <div class="container">
   <ng-container *ngIf="questions && questions.length">
     <div *ngFor="let question of questions">
-      <div class="row" *ngIf="isAuthenticated()">
-        <div class="col-sm-1">
+      <div class="row">
+        <div class="col-sm-1" *ngIf="isAuthenticated()">
           <div class="btn-group-vertical vcenter">
             <button type="button" class="btn btn-success" (click)="upVote(question.id)">
               <i class="fas fa-arrow-up fa-lg"></i>

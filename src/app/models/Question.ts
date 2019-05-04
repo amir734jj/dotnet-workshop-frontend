@@ -9,6 +9,7 @@ export class Question {
   tags: Tag[];
   answers: Answer[];
   vote: number;
+  time: Date;
 
   constructor() {
     this.id = Guid.create().toString();

@@ -33,7 +33,7 @@
             {{ tag.text }}
           </span>
             </div>
-            <div class="col-sm-6 text-right">
+            <div class="col-sm-6 text-right" *ngIf="isAuthenticated()">
               <div class="btn-group">
                 <label class="btn btn-default" btnCheckbox role="button" (click)="gotoEditQuestion()">Edit</label>
                 <label class="btn btn-danger" btnCheckbox role="button" (click)="deleteQuestion()">Delete</label>
@@ -62,7 +62,7 @@
     </div>
   </ng-container>
 
-  <div class="panel panel-default">
+  <div class="panel panel-default" *ngIf="isAuthenticated()">
     <div class="panel-heading">
       <h5 class="panel-title">
         Answer the question:
@@ -83,6 +83,12 @@
             <label class="btn btn-success" btnCheckbox role="button" (click)="submitAnswer()">Submit Answer</label>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="panel-footer">
+      <div class="row">
+        Please log-in to submit an answer!
       </div>
     </div>
   </div>

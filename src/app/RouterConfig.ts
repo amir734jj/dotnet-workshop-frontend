@@ -8,6 +8,7 @@ import {QuestionUpdateComponent} from './components/question/update/question.upd
 import {LogoutComponent} from './components/account/logout/logout.component';
 import {RegisterComponent} from './components/account/register/register.component';
 import {LoginComponent} from './components/account/login/login.component';
+import {ChatComponent} from './components/chat/chat.component';
 
 export const appRoutes: Routes = [
   {path: '', component: BoardIndexComponent},
@@ -16,6 +17,7 @@ export const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'board', component: BoardIndexComponent},
+  {path: 'chat', component: ChatComponent},
   {path: 'question/new', component: QuestionSaveComponent},
   {path: 'question/:id/edit', component: QuestionUpdateComponent},
   {path: 'question/:id', component: QuestionIndexComponent}
