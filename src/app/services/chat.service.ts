@@ -4,34 +4,36 @@ import {HttpTransportType, HubConnection} from '@aspnet/signalr';
 import * as signalR from '@aspnet/signalr';
 import {BASE_ADDRESS} from '../constants/api';
 
-@Injectable()
+@Injectable({
+ providedIn: 'root'
+})
 export class ChatService {
-  private _connection: HubConnection;
+  private static CONNECTION: HubConnection;
+  private _connected: boolean;
 
-  constructor(private authenticationUtility: AuthenticationUtility) {
-
-  }
+  constructor(private authenticationUtility: AuthenticationUtility) { }
 
   send<T>(method: string, arg: T) {
-    this._connection.invoke(method, arg).then();
+    if (this._connected && ((ChatService.CONNECTION) as any).connectionState) {
+      ChatService.CONNECTION.invoke(method, arg).then();
+    }
 
     return this;
   }
 
   registerHandler<T>(method: string, handler: (T) => void) {
-    this._connection.on(method, handler);
+    ChatService.CONNECTION.on(method, handler);
 
     return this;
   }
 
   build() {
-    if (this.authenticationUtility.getToken()) {
-      this._connection = new signalR.HubConnectionBuilder()
+    if (!ChatService.CONNECTION && this.authenticationUtility.getToken()) {
+      ChatService.CONNECTION = new signalR.HubConnectionBuilder()
         .withUrl(`${BASE_ADDRESS}/chat`, {
           accessTokenFactory: () => this.authenticationUtility.getToken(),
           transport: HttpTransportType.LongPolling
         })
-        .configureLogging(signalR.LogLevel.Information)
         .build();
     }
 
@@ -39,8 +41,8 @@ export class ChatService {
   }
 
   start() {
-    this._connection.start().then(() => {
-      console.log("connected");
+    ChatService.CONNECTION.start().then(() => {
+      this._connected = true;
     });
   }
 }

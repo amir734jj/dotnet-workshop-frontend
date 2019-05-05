@@ -11,7 +11,7 @@ export class ChatComponent implements OnInit {
 
   public count: number = 0;
   public message: string = '';
-  public messages: Message[];
+  public messages: Message[] = [];
 
   constructor(private chatService: ChatService) {
   }
@@ -21,14 +21,21 @@ export class ChatComponent implements OnInit {
       .registerHandler<number>('Count', x => {
         this.count = x;
       })
-      .registerHandler<Message>('Receive', x => {
+      .registerHandler<Message>('ReceiveMessage', x => {
         this.messages.push(x);
       })
       .start();
   }
 
   send() {
-    this.chatService.send('Send', this.message);
+    this.chatService.send('RelayMessage', {
+        text: this.message
+      }
+    );
     this.message = '';
+  }
+
+  formatDate(date: Date) {
+    return new Date(date).toISOString();
   }
 }

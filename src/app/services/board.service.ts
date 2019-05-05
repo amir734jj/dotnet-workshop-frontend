@@ -18,6 +18,13 @@ export class QuestionService extends TokenService {
     return this.authenticationUtility.getToken();
   }
 
+  search(keyword: string) {
+    const uri = `${this.host}/search/${keyword}`;
+    return this
+      .http
+      .get<Question[]>(uri, { headers: this.resolveHeader()});
+  }
+
   saveQuestion(question: Question) {
     const uri = `${this.host}`;
     return this
@@ -36,7 +43,7 @@ export class QuestionService extends TokenService {
     const uri = `${this.host}`;
     return this
       .http
-      .get<Array<Question>>(uri, { headers: this.resolveHeader()});
+      .get<Question[]>(uri, { headers: this.resolveHeader()});
   }
 
   deleteQuestion(id: string) {

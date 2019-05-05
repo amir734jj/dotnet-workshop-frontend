@@ -13,6 +13,7 @@ export class BoardIndexComponent implements OnInit {
 
   constructor(private questionService: QuestionService, private voteService: VoteService, private authenticationUtility: AuthenticationUtility) { }
 
+  keyword: string = '';
   questions: Array<Question>;
 
   ngOnInit() {
@@ -35,6 +36,17 @@ export class BoardIndexComponent implements OnInit {
     this.voteService.downVote(id).subscribe(res => {
       this.getQuestions();
     });
+  }
+
+  search() {
+    this.questionService.search(this.keyword).subscribe(res => {
+      this.questions = res;
+    });
+  }
+
+  clear() {
+    this.keyword = '';
+    this.getQuestions();
   }
 
   isAuthenticated() {
