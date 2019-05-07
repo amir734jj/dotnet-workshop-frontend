@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {appRoutes} from './RouterConfig';
-import {RouterModule} from '@angular/router';
+import {RouteReuseStrategy, RouterModule} from '@angular/router';
 import {BoardModule} from './modules/board.module';
 import {HttpClientModule} from '@angular/common/http';
 import {QuestionModule} from './modules/question.module';
@@ -12,6 +12,7 @@ import {ButtonsModule} from 'ngx-bootstrap/buttons';
 import {AccountModule} from './modules/account.module';
 import {CommonComponentModule} from './modules/common.module';
 import {ChatModule} from './modules/chat.module';
+import {CustomReuseStrategy} from './utilities/custom.reuse.strategy.utility';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import {ChatModule} from './modules/chat.module';
     QuestionModule,
     ChatModule
   ],
-  providers: [],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
