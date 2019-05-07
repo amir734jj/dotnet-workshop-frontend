@@ -1,6 +1,10 @@
 <div class="container">
 
   <div class="row">
+    <div class="col-sm-10" *ngIf="!questions || !questions.length">
+      No Questions yet ...
+    </div>
+
     <div class="col-sm-10" *ngIf="questions && questions.length">
       <div *ngFor="let question of questions">
         <div class="row">
