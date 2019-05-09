@@ -8,6 +8,7 @@ import {AuthenticationUtility} from './utilities/authentication.utility';
 })
 export class AppComponent {
   title = 'dotnet-intermediate-workshop';
+  public navBarCollapsed = true;
 
   constructor(private authenticationUtility: AuthenticationUtility) { }
 
