@@ -4,7 +4,7 @@ import {Guid} from 'guid-typescript';
 export class TagUtility {
 
   private originalTags: Tag[];
-  public tags: { value: number; display: string }[];
+  public tags: { value: string; display: string }[];
 
   constructor() {
     this.originalTags = [];
@@ -13,17 +13,17 @@ export class TagUtility {
 
   resolveRawTags(): Tag[] {
     return this.tags.map((x) => {
-      const id = Guid.create().toString();
+      const id = Guid.isGuid(x.value) ? x.value : Guid.create().toString();
 
-      return {id, text: x.display};
+      return {id: id, text: x.display};
     });
   }
 
   setTags(tags: Tag[]) {
     this.originalTags = tags;
-    this.tags = tags.map((x, index) => {
+    this.tags = tags.map(x => {
       return {
-        value: index,
+        value: x.id,
         display: x.text
       };
     });
