@@ -21,10 +21,10 @@ export class QuestionService extends TokenService {
   }
 
   search(keyword: string) {
-    const uri = `${this.host}/search/${keyword}`;
+    const uri = `${this.host}/search`;
     return this
       .http
-      .get<Question[]>(uri, {headers: this.resolveHeader()});
+      .get<Question[]>(uri, {headers: this.resolveHeader(), params: {keyword: keyword}});
   }
 
   saveQuestion(question: Question) {
