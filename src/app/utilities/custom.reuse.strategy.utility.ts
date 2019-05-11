@@ -3,32 +3,28 @@ import {ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy} from '@
 
 export class CustomReuseStrategy implements RouteReuseStrategy {
 
-  handlers: {[key: string]: DetachedRouteHandle} = {};
+  handlers: { [key: string]: DetachedRouteHandle } = {};
 
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
-    console.debug('CustomReuseStrategy:shouldDetach', route);
-    return true;
+    return route.data.shouldReuse || false;
   }
 
-  store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
-    console.debug('CustomReuseStrategy:store', route, handle);
-    this.handlers[route.routeConfig.path] = handle;
+  store(route: ActivatedRouteSnapshot, handle: {}): void {
+    if (route.data.shouldReuse) {
+      this.handlers[route.routeConfig.path] = handle;
+    }
   }
 
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
-    console.debug('CustomReuseStrategy:shouldAttach', route);
     return !!route.routeConfig && !!this.handlers[route.routeConfig.path];
   }
 
-  retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
-    console.debug('CustomReuseStrategy:retrieve', route);
+  retrieve(route: ActivatedRouteSnapshot): {} {
     if (!route.routeConfig) return null;
     return this.handlers[route.routeConfig.path];
   }
 
   shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
-    console.debug('CustomReuseStrategy:shouldReuseRoute', future, curr);
-    return future.routeConfig === curr.routeConfig;
+    return future.data.shouldReuse || false;
   }
-
 }

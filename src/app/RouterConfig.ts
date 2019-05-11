@@ -17,7 +17,7 @@ export const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'board', component: BoardIndexComponent},
-  {path: 'chat', component: ChatComponent},
+  {path: 'chat', component: ChatComponent, data: {shouldReuse: true}},
   {path: 'question/new', component: QuestionSaveComponent},
   {path: 'question/:id/edit', component: QuestionUpdateComponent},
   {path: 'question/:id', component: QuestionIndexComponent}

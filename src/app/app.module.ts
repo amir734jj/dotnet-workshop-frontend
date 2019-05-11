@@ -20,7 +20,7 @@ import {CustomReuseStrategy} from './utilities/custom.reuse.strategy.utility';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {useHash: true}),
     ButtonsModule.forRoot(),
     HttpClientModule,
     CommonComponentModule,
@@ -30,7 +30,7 @@ import {CustomReuseStrategy} from './utilities/custom.reuse.strategy.utility';
     ChatModule
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }
+    {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
   ],
   bootstrap: [AppComponent]
 })
