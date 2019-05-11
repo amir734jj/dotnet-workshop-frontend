@@ -3,6 +3,8 @@ import {QuestionService} from '../../../services/board.service';
 import {Question} from '../../../models/Question';
 import {VoteService} from '../../../services/vote.service';
 import {AuthenticationUtility} from '../../../utilities/authentication.utility';
+import {SortKeyEnum} from '../../../models/enums/SortKeyEnum';
+import {EnumValues} from 'enum-values';
 
 @Component({
   selector: 'app-board',
@@ -10,6 +12,9 @@ import {AuthenticationUtility} from '../../../utilities/authentication.utility';
   styleUrls: ['./board.index.component.sass']
 })
 export class BoardIndexComponent implements OnInit {
+
+  public SortKeyEnum = SortKeyEnum;
+  public sortKey: SortKeyEnum = SortKeyEnum.None;
 
   constructor(private questionService: QuestionService, private voteService: VoteService, private authenticationUtility: AuthenticationUtility) { }
 
@@ -21,7 +26,7 @@ export class BoardIndexComponent implements OnInit {
   }
 
   getQuestions() {
-    this.questionService.getQuestions().subscribe(res => {
+    this.questionService.getQuestions(this.sortKey).subscribe(res => {
       this.questions = res;
     });
   }
@@ -47,6 +52,15 @@ export class BoardIndexComponent implements OnInit {
   clear() {
     this.keyword = '';
     this.getQuestions();
+  }
+
+  setSortBy(sortKey: SortKeyEnum) {
+    this.sortKey = sortKey;
+    this.getQuestions();
+  }
+
+  getSortKeyName() {
+    return EnumValues.getNameFromValue(SortKeyEnum, this.sortKey);
   }
 
   isAuthenticated() {

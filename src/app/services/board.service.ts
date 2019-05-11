@@ -4,6 +4,8 @@ import {API_ADDRESS} from '../constants/api';
 import {Question} from '../models/Question';
 import {TokenService} from './abstracts/token.service';
 import {AuthenticationUtility} from '../utilities/authentication.utility';
+import {SortKeyEnum} from '../models/enums/SortKeyEnum';
+import {EnumValues} from 'enum-values';
 
 @Injectable()
 export class QuestionService extends TokenService {
@@ -22,41 +24,41 @@ export class QuestionService extends TokenService {
     const uri = `${this.host}/search/${keyword}`;
     return this
       .http
-      .get<Question[]>(uri, { headers: this.resolveHeader()});
+      .get<Question[]>(uri, {headers: this.resolveHeader()});
   }
 
   saveQuestion(question: Question) {
     const uri = `${this.host}`;
     return this
       .http
-      .post<Question>(uri, question, { headers: this.resolveHeader()});
+      .post<Question>(uri, question, {headers: this.resolveHeader()});
   }
 
   getQuestion(id: string) {
     const uri = `${this.host}/${id}`;
     return this
       .http
-      .get<Question>(uri, { headers: this.resolveHeader()});
+      .get<Question>(uri, {headers: this.resolveHeader()});
   }
 
-  getQuestions() {
+  getQuestions(sortKey: SortKeyEnum) {
     const uri = `${this.host}`;
     return this
       .http
-      .get<Question[]>(uri, { headers: this.resolveHeader()});
+      .get<Question[]>(uri, {headers: this.resolveHeader(), params: {sortKey: sortKey.toString()}});
   }
 
   deleteQuestion(id: string) {
     const uri = `${this.host}/${id}`;
     return this
       .http
-      .delete<boolean>(uri, { headers: this.resolveHeader()});
+      .delete<boolean>(uri, {headers: this.resolveHeader()});
   }
 
   updateQuestion(question: Question) {
     const uri = `${this.host}/${question.id}`;
     return this
       .http
-      .put<boolean>(uri, question, { headers: this.resolveHeader()});
+      .put<boolean>(uri, question, {headers: this.resolveHeader()});
   }
 }

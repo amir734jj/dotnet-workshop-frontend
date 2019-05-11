@@ -5,6 +5,7 @@ import {BoardIndexComponent} from '../components/board/index/board.index.compone
 import {AppRoutingModule} from '../app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {VoteService} from '../services/vote.service';
+import {BsDropdownModule} from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import {VoteService} from '../services/vote.service';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [QuestionService, VoteService],
   declarations: [BoardIndexComponent],
