@@ -76,7 +76,7 @@
       <markdown class="variable-binding" [data]="answer.text"></markdown>
     </div>
 
-    <div class="panel-footer">
+    <div class="panel-footer" *ngIf="isAuthenticated()">
       <div class="row">
         <div class="col-sm-12 text-right">
           <div class="btn-group">
@@ -86,7 +86,7 @@
       </div>
     </div>
 
-    <div class="panel-footer">
+    <div class="panel-footer" *ngIf="!isAuthenticated()">
       <div class="row">
         Please log-in to submit an answer!
       </div>
