@@ -1,5 +1,5 @@
 <div class="container">
-  <form (click)="handleRegister($event)">
+  <form (submit)="handleRegister($event)">
     <div class="form-group">
       <label for="email">Fullname:</label>
       <input type="text" class="form-control" id="fullname" [(ngModel)]="fullname" name="fullname">
