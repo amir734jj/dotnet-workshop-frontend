@@ -32,7 +32,6 @@ export class ChatService {
       ChatService.CONNECTION = new signalR.HubConnectionBuilder()
         .withUrl(`${BASE_ADDRESS}/chat`, {
           accessTokenFactory: () => this.authenticationUtility.getToken(),
-          transport: HttpTransportType.LongPolling
         })
         .build();
     }
